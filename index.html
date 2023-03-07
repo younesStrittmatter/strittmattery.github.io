@@ -2,9 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Younes Strittmatter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
-<body>
+<style>
+    #main-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+    }
+    #size {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 200vh;
+        width: 100vw;
+    }
 
+</style>
+<body>
+<div id="size"></div>
+<canvas id="main-canvas"></canvas>
+<script src="src/pixi.js"></script>
+<script>
+    const canvas = document.getElementById('main-canvas')
+    const app = new PIXI.Application({
+        view: canvas,
+        width: window.innerWidth,
+        height: window.innerHeight
+        })
+    const texture = PIXI.Texture.from('res/brain.jpeg')
+    const img = new PIXI.Sprite(texture)
+    img.x = app.screen.width/4
+    img.y = app.screen.height/4
+    img.width = app.screen.width/2
+    img.height = app.screen.height/2
+    app.stage.addChild(img)
+</script>
 </body>
 </html>
