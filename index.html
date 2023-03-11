@@ -13,6 +13,7 @@
         height: 100vh;
         width: 100vw;
     }
+
     .text {
         position: fixed;
         font-family: Deja V, sans-serif;
@@ -29,11 +30,47 @@
         color: white;
         z-index: 10;
     }
+
+    .link_div {
+        position: fixed;
+        padding: 1vw;
+        text-decoration: none;
+        font-family: Deja V, sans-serif;
+        font-weight: lighter;
+        font-size: 6vh;
+        letter-spacing: .3vw;
+        text-shadow: #000 0 0 5px;
+        color: white;
+        z-index: 10;
+        opacity: 0;
+    }
+
+    #link_lb {
+        bottom: 0;
+        left: 0;
+        text-align: left;
+    }
+
+    #link_rb {
+        bottom: 0;
+        right: 0;
+        text-align: right;
+    }
+
+    #link_tc {
+        width: 100vw;
+        top: 0;
+        text-align: center;
+    }
 </style>
 
 <body>
 <div style="position: absolute; left: 0; top: 0; width: 10000px; height: 10000px; background: linear-gradient(45deg, #fff, #000)"></div>
-<div class="text">YOUNES STRITTMATTER</div>
+<div class="text" id="center">YOUNES STRITTMATTER</div>
+<a class="link_div" id="link_lb" href="https://autoresearch.github.io/sweetbean/"><span style="color: firebrick">sweet</span>Bean</a>
+<a class="link_div" id="link_rb" href="https://github.com/jspsych/jspsych-contrib"><span style="color: firebrick">js</span>Psych</a>
+<a class="link_div" id="link_tc" href="https://musslick.github.io/AER_website/"><span style="color: firebrick">auto</span>Ra</a>
+
 <canvas id="main-canvas"></canvas>
 <script src="src/pixi.js"></script>
 
@@ -47,6 +84,10 @@
     gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
     vTextureCoord = aTextureCoord;
     }
+
+
+
+
 
 
 </script>
@@ -136,6 +177,10 @@ float strange_length = uPosX + uPosY;
 
     }
 
+
+
+
+
 </script>
 
 <script>
@@ -144,14 +189,95 @@ float strange_length = uPosX + uPosY;
     let posX = 0
     let posY = 0
 
+    map_range = (value, old_min, old_max, new_min, new_max) => {
+        return (value - old_min) / (old_max - old_min) * (new_max - new_min) + new_min
+    }
+    map_range_revers = (value, old_min, old_max, new_min, new_max) => {
+        return (old_max - value) / (old_max - old_min) * (new_max - new_min) + new_min
+    }
+
+    function continuousSawtooth(x) {
+
+        const t = x - Math.floor(x); // Normalize to [0, 1)
+        const s1 = 2 * t;
+        const s2 = 2 - 2 * t ;
+        const out = s1 < 1 ? s1: s2;
+        return -1*(out * 2 - 1);
+    }
+
+    set_text = () => {
+        let center = document.getElementById('center')
+        let lb = document.getElementById('link_lb')
+        let rb = document.getElementById('link_rb')
+        let tc = document.getElementById('link_tc')
+        let pos = continuousSawtooth((posX + posY) / 10000.)
+        console.log(pos)
+        let o = 1.
+        let o_2 = 0.
+        if (pos <= 1. && pos > .6) {
+            center.innerText = 'YOUNES STRITTMATTER'
+            o = map_range(pos, .6, 1., 0., 1.)
+            o_2 = 0.
+        }
+        if (pos <= .6 && pos > .4) {
+            center.innerText = 'COGNITION'
+            o = map_range_revers(pos, .4, .6, 0, 1)
+            o_2 = 0.
+        }
+        if (pos <= .4 && pos > .2) {
+            center.innerText = 'COGNITION'
+            o = map_range(pos, .2, .4, 0, 1)
+            o_2 = 0.
+        }
+        if (pos <= .2 && pos > 0.) {
+            center.innerText = 'LEARNING'
+            o = map_range_revers(pos, 0., .2, 0, 1)
+            o_2 = 0.
+        }
+        if (pos <= 0. && pos > -.2) {
+            center.innerText = 'LEARNING'
+            o = map_range(pos, -.2, 0., 0, 1)
+        }
+        if (pos <= -.2 && pos > -.4) {
+            center.innerText = 'DECISION-MAKING'
+            o = map_range_revers(pos, -.4, -.2, 0, 1)
+            o_2 = 0.
+        }
+        if (pos <= -.4 && pos > -.6) {
+            center.innerText = 'DECISION-MAKING'
+            o = map_range(pos, -.6, -.4, 0, 1)
+            o_2 = 0.
+        }
+        if (pos <= -.6 && pos > -.8) {
+            center.innerText = 'CONTRIBUTIONS'
+            o = map_range_revers(pos, -.8, -.6, 0, 1)
+            o_2 = map_range_revers(pos, -.8, -.6, 0, 1)
+        }
+        if (pos <= -.8) {
+            o = 1.
+            o_2 = 1.
+        }
+        lb.style.opacity = o_2.toString()
+        rb.style.opacity = o_2.toString()
+        tc.style.opacity = o_2.toString()
+        center.style.opacity = o.toString()
+
+    }
+    set_text()
+    setInterval(set_text, 100)
+
+
     document.documentElement.scrollLeft = MID_X
     document.documentElement.scrollTop = MID_Y
 
     document.onscroll = () => {
         posX += document.documentElement.scrollLeft - MID_X
         posY += document.documentElement.scrollTop - MID_Y
+
+
         document.documentElement.scrollLeft = MID_X
         document.documentElement.scrollTop = MID_Y
+
     }
 
     const canvas = document.getElementById('main-canvas')
