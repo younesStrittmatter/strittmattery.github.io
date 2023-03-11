@@ -7,11 +7,15 @@
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9XS11L792"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-L9XS11L792');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-L9XS11L792');
 </script>
 <style>
     #main-canvas {
@@ -54,9 +58,14 @@
     }
 
     @media (orientation: portrait) {
-    .text {font-size:6vw;}
-    .link_div {font-size:6vw;}
-}
+        .text {
+            font-size: 6vw;
+        }
+
+        .link_div {
+            font-size: 6vw;
+        }
+    }
 
     #link_lb {
         bottom: 0;
@@ -76,14 +85,30 @@
         transform: translateX(-50%);
         text-align: center;
     }
+
+    .procedural_div {
+        position: fixed;
+        font-family: Deja V, sans-serif;
+        font-weight: lighter;
+        color: white;
+        z-index: 1;
+        overflow: hidden;
+        display: block;
+        width: 10vw;
+        text-align: center;
+        text-shadow: #000 0 0 2px;
+    }
 </style>
 
 <body>
 <div style="position: absolute; left: 0; top: 0; width: 10000px; height: 10000px; background: linear-gradient(45deg, #fff, #000)"></div>
 <div class="text" id="center">YOUNES STRITTMATTER</div>
-<a class="link_div" id="link_lb" href="https://autoresearch.github.io/sweetbean/"><span style="color: firebrick">sweet</span>Bean</a>
-<a class="link_div" id="link_rb" href="https://github.com/jspsych/jspsych-contrib"><span style="color: firebrick">js</span>Psych</a>
-<a class="link_div" id="link_tc" href="https://musslick.github.io/AER_website/"><span style="color: firebrick">auto</span>Ra</a>
+<a class="link_div" id="link_lb" href="https://autoresearch.github.io/sweetbean/"><span
+        style="color: firebrick">sweet</span>Bean</a>
+<a class="link_div" id="link_rb" href="https://github.com/jspsych/jspsych-contrib"><span
+        style="color: firebrick">js</span>Psych</a>
+<a class="link_div" id="link_tc" href="https://musslick.github.io/AER_website/"><span
+        style="color: firebrick">auto</span>Ra</a>
 
 <canvas id="main-canvas"></canvas>
 <script src="src/pixi.js"></script>
@@ -98,9 +123,6 @@
     gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
     vTextureCoord = aTextureCoord;
     }
-
-
-
 
 
 
@@ -219,9 +241,212 @@ float strange_length = uPosX + uPosY;
 
 
 
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <script>
+    const psychologyTerms = [
+        "Abnormal psychology",
+        "Action potential",
+        "Aggression",
+        "Altruism",
+        "Anxiety",
+        "Applied behavior analysis",
+        "Attention deficit hyperactivity disorder",
+        "Attachment theory",
+        "Autism",
+        "Behavior therapy",
+        "Behaviorism",
+        "Biopsychology",
+        "Cognitive psychology",
+        "Collective unconscious",
+        "Conditioning",
+        "Conformity",
+        "Consciousness",
+        "Defense mechanism",
+        "Depression",
+        "Developmental psychology",
+        "Dream analysis",
+        "Ego",
+        "Emotion",
+        "Empathy",
+        "Experimental psychology",
+        "Family therapy",
+        "Freudian psychology",
+        "Gestalt psychology",
+        "Humanistic psychology",
+        "Identity",
+        "Intelligence",
+        "Mental illness",
+        "Motivation",
+        "Neuropsychology",
+        "Obsessive-compulsive disorder",
+        "Operant conditioning",
+        "Perception",
+        "Personality",
+        "Phobia",
+        "Positive psychology",
+        "Psychoanalysis",
+        "Psychodynamic theory",
+        "Psychological assessment",
+        "Psychological disorder",
+        "Psychological testing",
+        "Psychology",
+        "Psychotherapy",
+        "Schizophrenia",
+        "Self-esteem",
+        "Sensation",
+        "Sensory processing disorder",
+        "Social psychology",
+        "Stress",
+        "Subconscious",
+        "Sublimation",
+        "Substance abuse",
+        "Trauma",
+        "Unconscious",
+        "Visual perception"
+    ];
+    const neuroscienceTerms = [
+        "Action potential",
+        "Amygdala",
+        "Axon",
+        "Basal ganglia",
+        "Blood-brain barrier",
+        "Brain",
+        "Brainstem",
+        "Broca's area",
+        "Cerebellum",
+        "Cerebral cortex",
+        "Cerebral hemispheres",
+        "Cingulate cortex",
+        "Dendrite",
+        "Dopamine",
+        "Endorphins",
+        "Epigenetics",
+        "Frontal lobe",
+        "GABA",
+        "Glutamate",
+        "Hippocampus",
+        "Hypothalamus",
+        "Limbic system",
+        "Medulla oblongata",
+        "Memory",
+        "Meninges",
+        "Mental illness",
+        "MRI",
+        "Neocortex",
+        "Neural network",
+        "Neuron",
+        "Neuroplasticity",
+        "Neuroscience",
+        "Neurotransmitter",
+        "Norepinephrine",
+        "Occipital lobe",
+        "Optic nerve",
+        "Parietal lobe",
+        "Parkinson's disease",
+        "Prefrontal cortex",
+        "Schizophrenia",
+        "Serotonin",
+        "Somatosensory cortex",
+        "Spinal cord",
+        "Substantia nigra",
+        "Synapse",
+        "Temporal lobe",
+        "Thalamus",
+        "Wernicke's area"
+    ];
+
+    const modelingTerms = [
+        "Bayesian modeling",
+        "Connectionist modeling",
+        "Deep learning",
+        "Dynamic systems modeling",
+        "Embodied cognition",
+        "Evolutionary modeling",
+        "General linear model",
+        "Graphical models",
+        "Hidden Markov models",
+        "Latent variable modeling",
+        "Machine learning",
+        "Markov decision processes",
+        "Mixture models",
+        "Neural networks",
+        "Nonlinear dynamical systems",
+        "Probabilistic graphical models",
+        "Reinforcement learning",
+        "Signal detection theory",
+        "State-space models",
+        "Structural equation modeling"
+    ];
+    const aiTerms = [
+        "Artificial intelligence",
+        "Backpropagation",
+        "Bayesian networks",
+        "Clustering",
+        "Convolutional neural networks",
+        "Decision trees",
+        "Deep learning",
+        "Expert systems",
+        "Fuzzy logic",
+        "Genetic algorithms",
+        "Gradient descent",
+        "Heuristic search",
+        "Inference",
+        "Logic programming",
+        "Machine learning",
+        "Natural language processing",
+        "Neural networks",
+        "Object recognition",
+        "Ontologies",
+        "Pattern recognition",
+        "Planning",
+        "Probabilistic reasoning",
+        "Reinforcement learning",
+        "Semantic web",
+        "Support vector machines"
+    ];
+
+    const pastelColors = [
+        '#F5D5CBaa', // pale pink
+        '#FFEBD7aa', // peach
+        '#E8E9EBaa', // light gray
+        '#D5E8D4aa', // pale green
+        '#D7E3FEaa', // pale blue
+        '#F2E2CEaa', // beige
+        '#FBE7C6aa', // light orange
+        '#E0BBE4aa', // lavender
+        '#D5D5D5aa', // silver
+        '#C5E0DCaa'  // pale turquoise
+    ];
+    const fontSizes = [
+        '9pt',
+        '10pt',
+        '11pt',
+        '12pt',
+        '13pt',
+        '14pt',
+        '15pt',
+        '16pt',
+        '17pt',
+        '18pt',
+        '19pt'
+
+    ];
+
+
+    const word_list = psychologyTerms.concat(neuroscienceTerms).concat(modelingTerms).concat(aiTerms).concat(Array(300).fill(''));
+
+
     const MID_X = 5000
     const MID_Y = 5000
     let posX = 0
@@ -235,12 +460,11 @@ float strange_length = uPosX + uPosY;
     }
 
     function continuousSawtooth(x) {
-
         const t = x - Math.floor(x); // Normalize to [0, 1)
         const s1 = 2 * t;
-        const s2 = 2 - 2 * t ;
-        const out = s1 < 1 ? s1: s2;
-        return -1*(out * 2 - 1);
+        const s2 = 2 - 2 * t;
+        const out = s1 < 1 ? s1 : s2;
+        return -1 * (out * 2 - 1);
     }
 
     set_text = () => {
@@ -294,6 +518,9 @@ float strange_length = uPosX + uPosY;
             o = 1.
             o_2 = 1.
         }
+        lb.style.display = o_2 > .1 ? 'block' : 'none'
+        rb.style.display = o_2 > .1 ? 'block' : 'none'
+        tc.style.display = o_2 > .1 ? 'block' : 'none'
         lb.style.opacity = o_2.toString()
         rb.style.opacity = o_2.toString()
         tc.style.opacity = o_2.toString()
@@ -303,19 +530,93 @@ float strange_length = uPosX + uPosY;
     set_text()
     setInterval(set_text, 100)
 
+    function simpleNoise(x, y) {
+        const random = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453123;
+        return random - Math.floor(random);
+    }
 
     document.documentElement.scrollLeft = MID_X
     document.documentElement.scrollTop = MID_Y
 
+    class ProceduralDic {
+        constructor() {
+            this.speed = 5. + Math.random() * 30.
+            this.posX = Math.random() * 100.
+            this.posY = Math.random() * 100.
+            this.addition = Math.random() * 40000
+            this.div = document.createElement('div')
+            this.div.classList.add('procedural_div')
+            document.body.append(this.div)
+        }
+
+        update(x, y) {
+            let pos_x = (((x / this.speed) + this.posX)) % 100
+            let pos_y = (((y / this.speed) + this.posY)) % 100
+            if (pos_x > 0) {
+                pos_x -= 100
+            }
+            if (pos_y > 0) {
+                pos_y -= 100
+            }
+            let column_x = Math.floor(((x / this.speed) + this.posX) / 100.)
+            let column_y = Math.floor(((y / this.speed) + this.posY) / 100.)
+
+            this.div.style.left = -pos_x + 'vw'
+            this.div.style.top = -pos_y + 'vh'
+            let index = Math.floor(simpleNoise(column_x + this.addition, column_y + this.addition) * word_list.length)
+
+            x = (pos_x + 50) / 50.
+            y = (pos_y + 50) / 50.
+
+
+            this.div.style.opacity = (1. - (x * x + y * y)).toString()
+            let index_color = Math.floor(simpleNoise(column_x + this.addition, column_y + this.addition) * pastelColors.length)
+            this.div.style.color = pastelColors[index_color]
+
+            let index_font_size = Math.floor(simpleNoise(column_x + this.addition, column_y + this.addition) * fontSizes.length)
+            this.div.style.fontSize = fontSizes[index_font_size]
+
+            this.div.innerText = word_list[index]
+        }
+
+    }
+
+    p_s = []
+    for (let i = 0; i < 100; i++) {
+        p_s.push(new ProceduralDic())
+    }
+    for (const p of p_s) {
+        p.update(0, 0)
+    }
+
     document.onscroll = () => {
         posX += document.documentElement.scrollLeft - MID_X
         posY += document.documentElement.scrollTop - MID_Y
-
-
         document.documentElement.scrollLeft = MID_X
         document.documentElement.scrollTop = MID_Y
+        for (const p of p_s) {
+            p.update(posX, posY)
+        }
 
+        // let test_div_x = ((posX / 10.) % 100)
+        // let test_div_y = ((posY / 10.) % 100)
+        // if (test_div_x > 0) {
+        //     test_div_x = test_div_x - 100
+        // }
+        // if (test_div_y > 0) {
+        //     test_div_y = test_div_y - 100
+        // }
+        //
+        // let column_x = Math.floor(posX / 1000.)
+        // let column_y = Math.floor(posY / 1000.)
+        //
+        // console.log(column_x, column_y)
+        //
+        // test_div.style.left = -test_div_x + 'vw'
+        // test_div.style.top = -test_div_y + 'vh'
+        // test_div.innerText = column_x + ',' + column_y
     }
+
 
     const canvas = document.getElementById('main-canvas')
     const renderer = new PIXI.Renderer({
