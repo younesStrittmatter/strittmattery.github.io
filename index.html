@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Title</title>
+    <title>Younes Strittmatter</title>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9XS11L792"></script>
 <script>
@@ -55,6 +55,7 @@
         color: white;
         z-index: 10;
         opacity: 0;
+        border: 2px solid #fff2;
     }
 
     @media (orientation: portrait) {
@@ -68,19 +69,19 @@
     }
 
     #link_lb {
-        bottom: 0;
-        left: 0;
+        bottom: 4vh;
+        left: 4vw;
         text-align: left;
     }
 
     #link_rb {
-        bottom: 0;
-        right: 0;
+        bottom: 4vh;
+        right: 4vw;
         text-align: right;
     }
 
     #link_tc {
-        top: 0;
+        top: 4vh;
         left: 50vw;
         transform: translateX(-50%);
         text-align: center;
@@ -233,7 +234,7 @@ float strange_length = uPosX + uPosY;
 
     float elec_ = 1000.*(1.-stripe_1_*stripe_2_)*A_6*A_2;
 
-    gl_FragColor = gl_FragColor * .7 + gl_FragColor * (vec4(.5*elec,.5*elec,elec*2.1, 1.0) +vec4(2.1*elec_,.5*elec_,.5*elec_, 1.0));
+    gl_FragColor = gl_FragColor * .7 + gl_FragColor * (vec4(.5*elec,.5*elec,elec*2.1, 1.0) +vec4(2.1*elec_,1.5*elec_,1.5*elec_, 1.0));
 
 
     }
